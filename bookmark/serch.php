@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/syle.css">
     <title>BOOKMARK_SERCH</title>
   </head>
   <body>
+    
     <label><input type="text" id="book" 　value="本を検索" /></label>
     <input type="submit" id="serch" value="検索" />
 
@@ -21,13 +21,8 @@
     <form action="insert.php" method="POST"><table id="card9"></table><input type="submit" value="追加"></form>
     <form action="insert.php" method="POST"><table id="card10"></table><input type="submit" value="追加"></form>
  
-    
-    
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/serch.js"></script>
-
     <script>
 
 $("#serch").on("click", function () {
