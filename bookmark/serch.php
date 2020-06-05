@@ -6,7 +6,7 @@
     <title>BOOKMARK_SERCH</title>
   </head>
   <body>
-    
+
     <label><input type="text" id="book" 　value="本を検索" /></label>
     <input type="submit" id="serch" value="検索" />
 
@@ -41,20 +41,16 @@ $("#serch").on("click", function () {
         let bookName = item.volumeInfo.title;
         let bookURL = item.volumeInfo.imageLinks.thumbnail;
         let ISBN1310 = item.id;
-        
-        console.log(ISBN1310);
-        
-        
-     
+          
         view = `<ul>
                 <img src="${bookURL}" >
                 <li>${bookName}</li>　
+                <p>ID：${ISBN1310}</p>
                 </ul>
-                <div class="content">
-                      <label>タイトル：<input type="text" name="bookName" value="${bookName}"></label><br>
-                      <label>URL：<input type="text" name="bookURL" value="${bookURL}"　></label><br>
-                      <label>本情報：<input 　type="text" name="ISBN" value="${ISBN1310}"　></label><br>
-                      <label>コメント：<input type="text" name="comment" row="4"　cols="20"></label>
+                  <label><input type="hidden" name="ISBN" value="${ISBN1310}"　></label><br>
+                  <label>コメント：<input type="text" name="comment" row="4"　cols="20"></label>
+                  <label><input type="hidden" name="bookName" value="${bookName}"></label><br>
+                  <label><input type="hidden" name="bookURL" value="${bookURL}"　></label><br>
                   <br>
                 `;
                         
