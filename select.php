@@ -2,13 +2,13 @@
 //DB接続
 try {
     //Password:MAMP='root',XAMPP=''
-    $pdo = new PDO('mysql:dbname=gs_book;charset=utf8;host=localhost','root','root');
+    $pdo = new PDO('mysql:dbname=gs_book02;charset=utf8;host=localhost','root','root');
   } catch (PDOException $e) {
     exit('DBConnectError:'.$e->getMessage());
   }
 
   //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_bm_table");
+$stmt = $pdo->prepare("SELECT * FROM book_mark WHERE userid ='1' ORDER BY id DESC");
 $status = $stmt->execute();
 
 //３．データ表示
@@ -22,14 +22,14 @@ if($status==false) {
   //Selectデータの数だけ自動でループしてくれる
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
   while( $res = $stmt->fetch(PDO::FETCH_ASSOC)){ 
+   
     $view .= <<< EOT
     <p>
-    <a href="u_view.php?id={$res['id']}">
-    {$res["id"]}{$res["bookName"]}{$res["comment"]}
-    </a>
-    　<a href="delete.php?id={$res['id']}">
-    [削除]
-    </a>
+      {$res["id"]}{$res["bookName"]}<br>
+      <a href="u_view.php?id={$res['id']}">
+        <img src="{$res['imgURL']}">
+      </a>
+      <a href="delete.php?id={$res['id']}">[削除]</a>
     </p>
     EOT;
     
@@ -47,6 +47,7 @@ if($status==false) {
     <title>ブックマーク一覧</title>
 </head>
 <body>
+  Guest　さんのブックマーク一覧
     <?=$view?>
 </body>
 </html>

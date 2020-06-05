@@ -5,13 +5,13 @@ $id = $_GET["id"];
 //DB接続
 try {
     //Password:MAMP='root',XAMPP=''
-    $pdo = new PDO('mysql:dbname=gs_book;charset=utf8;host=localhost','root','root');
+    $pdo = new PDO('mysql:dbname=gs_book02;charset=utf8;host=localhost','root','root');
   } catch (PDOException $e) {
     exit('DBConnectError:'.$e->getMessage());
   }
 
   //２．データ登録SQL作成
-$delete= $pdo->prepare("DELETE FROM gs_bm_table WHERE  id=:id");
+$delete= $pdo->prepare("DELETE FROM book_mark WHERE  id=:id");
 $delete->bindValue(':id',$id,PDO::PARAM_INT);
 $status = $delete->execute();
 

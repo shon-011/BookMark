@@ -6,13 +6,13 @@ $id = $_GET["id"];
 //DB接続
 try {
     //Password:MAMP='root',XAMPP=''
-    $pdo = new PDO('mysql:dbname=gs_book;charset=utf8;host=localhost','root','root');
+    $pdo = new PDO('mysql:dbname=gs_book02;charset=utf8;host=localhost','root','root');
   } catch (PDOException $e) {
     exit('DBConnectError:'.$e->getMessage());
   }
 
   //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_bm_table WHERE id=:id");
+$stmt = $pdo->prepare("SELECT * FROM book_mark WHERE id=:id");
 $stmt->bindValue(':id',$id,PDO::PARAM_INT);
 $status = $stmt->execute();
 
@@ -43,8 +43,9 @@ $row = $stmt->fetch();
 <body>
 
 <form action="update.php" method="post">
-<label >本の名前：<input type="text" name="name" value="<?=$row[1]?>"></label><br>
-<label >コメント：<textArea type="text" name="comment"　row="4" cols="40"><?=$row[3]?></textArea></label><br>
+  <h2><?=$row[1]?></h2>
+  <img src="<?=$row[2]?>" >
+<label >コメント：<textArea type="text" name="comment"　row="4" cols="40"><?=$row[4]?></textArea></label><br>
 <input type="hidden" name="id" value="<?=$row['id']?>">
 <input type="submit" value="更新">
 </form>
