@@ -1,14 +1,14 @@
 <?php 
+session_start();
+include("../funcs.php");
+sic();
+
+
 //DB接続
-try {
-    //Password:MAMP='root',XAMPP=''
-    $pdo = new PDO('mysql:dbname=gs_book02;charset=utf8;host=localhost','root','root');
-  } catch (PDOException $e) {
-    exit('DBConnectError:'.$e->getMessage());
-  }
+$pdo = db_con();
 
   //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM book_mark WHERE userid ='1' ORDER BY id DESC");
+$stmt = $pdo->prepare("SELECT * FROM book_mark WHERE unique_user_id ='1' ORDER BY id DESC");
 $status = $stmt->execute();
 
 //３．データ表示
@@ -47,7 +47,10 @@ if($status==false) {
     <title>ブックマーク一覧</title>
 </head>
 <body>
+  
   Guest　さんのブックマーク一覧
+
+  <a href="logout.php">SIGN OUT</a>
     <?=$view?>
 </body>
 </html>

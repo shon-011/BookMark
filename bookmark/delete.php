@@ -1,14 +1,13 @@
 <?php
+session_start();
+include("../funcs.php");
+sic();
+
 $id = $_GET["id"];
 
 
 //DB接続
-try {
-    //Password:MAMP='root',XAMPP=''
-    $pdo = new PDO('mysql:dbname=gs_book02;charset=utf8;host=localhost','root','root');
-  } catch (PDOException $e) {
-    exit('DBConnectError:'.$e->getMessage());
-  }
+$pdo = db_con();
 
   //２．データ登録SQL作成
 $delete= $pdo->prepare("DELETE FROM book_mark WHERE  id=:id");

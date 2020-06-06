@@ -1,15 +1,14 @@
 <?php
+session_start();
+include("../funcs.php");
+sic();
+
 $id         = $_POST["id"];
 $comment    = $_POST["comment"];
 
 
 //DB接続
-try {
-    //Password:MAMP='root',XAMPP=''
-    $pdo = new PDO('mysql:dbname=gs_book02;charset=utf8;host=localhost','root','root');
-  } catch (PDOException $e) {
-    exit('DBConnectError:'.$e->getMessage());
-  }
+$pdo = db_con();
 
   //２．データ登録SQL作成
 $update= $pdo->prepare("UPDATE book_mark SET comment=:comment WHERE  id=:id");

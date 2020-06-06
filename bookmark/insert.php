@@ -1,25 +1,24 @@
 <?php
+session_start();
+include("../funcs.php");
+sic();
+
 $bookName = $_POST["bookName"];
 $imgURL = $_POST["bookURL"];
 $ISBN = $_POST["ISBN"];
 $comment = $_POST["comment"];
-$userid =1;
+$unique_user_id =1;
 
 
 
 //DB接続
-try {
-    //Password:MAMP='root',XAMPP=''
-    $pdo = new PDO('mysql:dbname=gs_book02;charset=utf8;host=localhost','root','root');
-  } catch (PDOException $e) {
-    exit('DBConnectError:'.$e->getMessage());
-  }
+$pdo = db_con();
 
   //３．データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO book_mark(bookName,imgURL,userid,comment,indate,ISBN)VALUES(:bookName,:imgURL,:userid,:comment,sysdate(),:ISBN)");
+$stmt = $pdo->prepare("INSERT INTO book_mark(bookName,imgURL,unique_user_id,comment,indate,ISBN)VALUES(:bookName,:imgURL,:unique_user_id,:comment,sysdate(),:ISBN)");
 $stmt->bindValue(':bookName', $bookName, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':imgURL', $imgURL, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-$stmt->bindValue(':userid', $userid, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':unique_user_id', $unique_user_id, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':comment', $comment, PDO::PARAM_STR); 
 $stmt->bindValue(':ISBN', $ISBN, PDO::PARAM_STR); 
 
