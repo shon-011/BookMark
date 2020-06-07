@@ -40,7 +40,7 @@ $row = $stmt->fetch();
     <title>編集画面</title>
 </head>
 <body>
-
+<a href="select.php">←</a>
 <form action="update.php" method="post">
   <h2><?=$row[1]?></h2>
   <img src="<?=$row[2]?>" >

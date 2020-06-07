@@ -14,7 +14,7 @@ $password = $_POST["password"];
 $pdo = db_con();
 
   //３．データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO book_users(userName,userID,password,act)VALUES(:userName,:userID,:password,:act)");
+$stmt = $pdo->prepare("INSERT INTO book_users(userName,userID,password)VALUES(:userName,:userID,:password)");
 $stmt->bindValue(':userName', $userName, PDO::PARAM_STR);  
 $stmt->bindValue(':userID', $userID, PDO::PARAM_STR);  
 $stmt->bindValue(':password', $password, PDO::PARAM_STR);  
@@ -31,10 +31,8 @@ if($status==false){
   }else{
     //５．リダイレクト
     $_SESSION["ssid"] = session_id();
-    header("Location: select.php");
+    header("Location: ../bookmark/select.php");
     exit();
   
   }
 ?>
-
-//jsonで取得から

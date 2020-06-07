@@ -32,6 +32,7 @@ if($status==false){
     if( $val["unique_user_id"] != ""){
         
         $_SESSION["ssid"] = session_id();
+        $_SESSION["unique_user_id"] = $val["unique_user_id"];
         $_SESSION["userName"] = $val["userName"];
 
         
