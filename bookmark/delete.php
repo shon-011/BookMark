@@ -22,14 +22,6 @@ if($status==false) {
   exit("SQLError:".$error[2]);
 
 }else{
-
-//２．データ登録SQL作成(book_number)
-$delete2= $pdo->prepare("DELETE FROM book_number WHERE  ISBN=:ISBN");
-$delete2->bindValue(':ISBN',$ISBN,PDO::PARAM_STR);
-$status2 = $delete2->execute();
-
-
-
 header("Location: select.php");
  
 

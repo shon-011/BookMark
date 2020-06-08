@@ -29,10 +29,12 @@ if($status==false){
     exit("SQLError:".$error[2]);
     echo $error[2];
   }else{
-    //５．リダイレクト
-    $_SESSION["ssid"] = session_id();
-    header("Location: ../bookmark/select.php");
-    exit();
+
+          
+          header("Location: signin.php");
+          exit();
+  
+    
   
   }
 ?>

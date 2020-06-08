@@ -63,23 +63,57 @@ if($status==false) {
   }
 }
 
-//DB接続2
-// $pdo = db_con();
+$ranking ="";
+
 //4.ランキングセット
-// $rank = $pdo->prepare("SELECT ISBN, COUNT(*) FROM book_mark GROUP BY ISBN;");
-// $sta = $rank->query();
+$rank = $pdo->prepare("SELECT ISBN, COUNT(*) AS COUNT FROM book_mark GROUP BY ISBN ORDER BY COUNT DESC LIMIT 5;");
+$sta = $rank->execute();
 
 //5.ランク表示
-// $rankview="";
-// if($sta==false){
-//   $error = $ran->errorInfo();
-//   exit("SQLError:".$error[2]);
-// }else{
-//   $res2 = $rank->fetch();
-//   var_dump($res2);
+$num = 0;
+$rankview="";
+if($sta==false){
+  $error = $ran->errorInfo();
+  exit("SQLError:".$error[2]);
+}else{
+  while( $res2 = $rank->fetch(PDO::FETCH_ASSOC)){ 
+  $RANK = $res2["ISBN"];
 
-// }
 
+  //5．データ登録SQL作成(book_number)
+  $stmt5 = $pdo->prepare("SELECT * FROM book_number WHERE ISBN = :ISBN ");
+  $stmt5->bindValue(':ISBN',$RANK,PDO::PARAM_STR);
+  $status5 = $stmt5->execute();
+
+  if($status5==false) {
+    //execute（SQL実行時にエラーがある場合）
+    $error = $stmt2->errorInfo();
+    exit("SQLError:".$error[2]);
+  }else{  
+    $bookInfo = $stmt5->fetch();
+    $bookName= $bookInfo["bookName"];
+    $imgURL= $bookInfo["imgURL"];
+    
+    $num++;
+    
+    $ranking .= <<< EOT
+      <p>{$num}位！
+      <img src="{$imgURL}">
+      </>
+      EOT;
+    
+      
+
+  
+    
+
+    }
+  
+  
+  
+
+}
+}
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +132,9 @@ if($status==false) {
 
     <div>
       <h3>ブックマーランキング</h3>
-      <div id="ranking"></div>
+      <div id="ranking">
+        <?=$ranking?>
+      </div>
     </div>
 </body>
 </html>
