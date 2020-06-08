@@ -27,7 +27,9 @@ if($status==false) {
     $ISBN = $res["ISBN"];
     
     //２．データ登録SQL作成(book_number)
-  $stmt2 = $pdo->prepare("SELECT * FROM book_number WHERE ISBN = '{$ISBN}' ");
+  $stmt2 = $pdo->prepare("SELECT * FROM book_number WHERE ISBN = :ISBN ");
+  $stmt2->bindValue(':ISBN',$ISBN,PDO::PARAM_STR);
+
     $status2 = $stmt2->execute();
     
    
@@ -49,7 +51,7 @@ if($status==false) {
       <a href="u_view.php?id={$res['id']}">
         <img src="{$imgURL}">
       </a>
-      <a href="delete.php?id={$res['id']}">[削除]</a>
+      <a href="delete.php?id={$res['id']}&ISBN={$ISBN}">[削除]</a>
     </p>
     EOT;
 

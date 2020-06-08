@@ -23,7 +23,32 @@ if($status==false) {
   exit("SQLError:".$error[2]);
 
 }else{
-$row = $stmt->fetch();
+  $row = $stmt->fetch();
+  $ISBN = $row["ISBN"];
+  
+  //２．データ登録SQL作成(book_number)
+  $stmt2 = $pdo->prepare("SELECT * FROM book_number WHERE ISBN = :ISBN ");
+  $stmt2->bindValue(':ISBN',$ISBN,PDO::PARAM_STR);
+  $status2 = $stmt2->execute();
+  
+    
+    //３．データ表示(book_numer)
+    if($status2==false) {
+        //execute（SQL実行時にエラーがある場合）
+      $error = $stmt2->errorInfo();
+      exit("SQLError:".$error[2]);
+    }else{  
+      $bookInfo = $stmt2->fetch();
+      $bookName = $bookInfo["bookName"];
+      $bookURL  = $bookInfo["imgURL"];
+
+      
+      
+      
+    }
+
+    
+
  
 
 }
@@ -42,9 +67,9 @@ $row = $stmt->fetch();
 <body>
 <a href="select.php">←</a>
 <form action="update.php" method="post">
-  <h2><?=$row[1]?></h2>
-  <img src="<?=$row[2]?>" >
-<label >コメント：<textArea type="text" name="comment"　row="4" cols="40"><?=$row[4]?></textArea></label><br>
+  <h2><?=$bookName?></h2>
+  <img src="<?=$bookURL?>" >
+<label >コメント：<textArea type="text" name="comment"　row="4" cols="40"><?=$row[3]?></textArea></label><br>
 <input type="hidden" name="id" value="<?=$row['id']?>">
 <input type="submit" value="更新">
 </form>
