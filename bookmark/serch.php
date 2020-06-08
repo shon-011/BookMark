@@ -8,7 +8,7 @@
   <body>
   <a href="select.php">←</a>
     <label><input type="text" id="book" 　value="本を検索" /></label>
-    <input type="submit" id="serch" value="検索"/>
+    <input type="submit" id="serch" value="検索" />
 
     <form action="insert.php" method="POST"><table id="card1"></table><input type="submit" value="追加"></form>
     <form action="insert.php" method="POST"><table id="card2"></table><input type="submit" value="追加"></form>

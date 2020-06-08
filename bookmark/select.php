@@ -25,6 +25,7 @@ if($status==false) {
 
   while( $res = $stmt->fetch(PDO::FETCH_ASSOC)){ 
     $ISBN = $res["ISBN"];
+    $comment = $res["comment"];
     
     //２．データ登録SQL作成(book_number)
   $stmt2 = $pdo->prepare("SELECT * FROM book_number WHERE ISBN = :ISBN ");
@@ -45,14 +46,29 @@ if($status==false) {
       $bookName= $bookInfo["bookName"];
       $imgURL= $bookInfo["imgURL"];
       
+      
       $view .= <<< EOT
-    <p>
-      {$res["id"]}{$bookName}<br>
-      <a href="u_view.php?id={$res['id']}">
-        <img src="{$imgURL}">
-      </a>
-      <a href="delete.php?id={$res['id']}&ISBN={$ISBN}">[削除]</a>
-    </p>
+
+        <div class=""row>
+          <div class="col s4">
+              <div class="card-panel hoverable "> 
+                <div class="card">
+                  <span class="">{$bookName}</span>
+                        <div class="card-image">
+                        <img src="{$imgURL}" class="imgURL">
+                        </div>
+                        <div class="card-content">
+                            <p>{$comment}</p>
+                        </div>
+                        <a href="u_view.php?id={$res['id']}">[編集]</a>
+                        <a href="delete.php?id={$res['id']}&ISBN={$ISBN}">[削除]</a>
+                    </div>
+                  </div>
+                </div>
+                </div>
+            
+
+
     EOT;
 
     }
@@ -97,15 +113,12 @@ if($sta==false){
     $num++;
     
     $ranking .= <<< EOT
-      <p>{$num}位！
+      <div class="col s2">
+      <p>{$num}位！<br>
       <img src="{$imgURL}">
-      </>
+      </br>
+      </div>
       EOT;
-    
-      
-
-  
-    
 
     }
   
@@ -121,20 +134,64 @@ if($sta==false){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ブックマーク一覧</title>
+    <!-- Google icon font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="../css/syle.css">
+    <title>HOME</title>
 </head>
 <body>
-  
-  <?=$userName?> さんのブックマーク一覧
-  <a href="serch.php">本を検索</a>
-  <a href="logout.php">SIGN OUT</a>
-    <?=$view?>
+<!-- Page Layout here -->
+<nav class="teal lighten-3 z-depth-4">
+<h4>ブックマーク課題</h4>
+</nav>
 
-    <div>
-      <h3>ブックマーランキング</h3>
+<div class="row ">
+  <div class="col s2　grey">
+ 
+ <div class="wrapper ">
+      <ul>
+        <li><a href="#">HOME</a></li>
+        <li><a href="serch.php">本　検索</a></li>
+        <li><a href="select.php/#rank">ランキング</a></li>
+        <li><a href="#">ユーザー設定</a></li><br>
+        <li><a href="logout.php">ログアウト</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col s10 z-depth-1">
+  <h4><?=$userName?>さんのブックマーク一覧</h4>
+    <div class="row" >
+    <?=$view?>
+    </div>
+    
+  <div>
+  
+  </div>
+    
+  
+    
+    <div id="rank" class="row">
+      <h4>ブックマーランキング</h4>
       <div id="ranking">
         <?=$ranking?>
       </div>
     </div>
+
+  </div>
+</div>
+
+
+
+
+  
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
+
+
+
