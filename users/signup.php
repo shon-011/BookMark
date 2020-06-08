@@ -13,7 +13,7 @@
 <body class="signin_body">
     <form action="insert_user.php" method="POST">
         <div class="head">
-            <h2>ブックマーク<br>　SIGN UP</h2>
+            <h2>ブックマーク課題<br>　SIGN UP</h2>
         </div>
         <div class="form_body">
             <label>UserName:<input type="text" name="userName"></label><br>

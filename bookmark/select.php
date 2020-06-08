@@ -53,7 +53,7 @@ if($status==false) {
           <div class="col s4">
               <div class="card-panel hoverable "> 
                 <div class="card">
-                  <span class="">{$bookName}</span>
+                  <h5 class="">{$bookName}</h5>
                         <div class="card-image">
                         <img src="{$imgURL}" class="imgURL">
                         </div>
@@ -152,9 +152,8 @@ if($sta==false){
  
  <div class="wrapper ">
       <ul>
-        <li><a href="#">HOME</a></li>
+        <li><a href="select.php">HOME</a></li>
         <li><a href="serch.php">本　検索</a></li>
-        <li><a href="select.php/#rank">ランキング</a></li>
         <li><a href="#">ユーザー設定</a></li><br>
         <li><a href="logout.php">ログアウト</a></li>
       </ul>
@@ -166,13 +165,7 @@ if($sta==false){
     <div class="row" >
     <?=$view?>
     </div>
-    
-  <div>
-  
-  </div>
-    
-  
-    
+        
     <div id="rank" class="row">
       <h4>ブックマーランキング</h4>
       <div id="ranking">

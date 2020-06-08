@@ -13,7 +13,7 @@
 <body class="signin_body">
     <form action="signin_act.php" method="POST">
         <div class="head">
-            <h2>ブックマーク<br>　SIGN IN</h2>
+            <h2>ブックマーク課題<br>　SIGN IN</h2>
         </div>
         <div class="form_body">
             <label>UserID:<input type="text" name="userID" class="validate"></label><br>
